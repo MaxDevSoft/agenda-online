@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	  <title>Agenda Clínica</title>
+	<!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" th:href="@{/style/styleCss.css}"/>
+
+</head>
+<body>
+
+	  <!-- HEADER -->
+	  <header th:fragment="header">
+		<div class="navbar-fixed">
+		<nav class="menu">
+		    <div class="nav-wrapper">
+		     
+		      <div class="menu-itens">
+			      <ul class="menuesquerda left hide-on-med-and-down">
+			        <li><a href="#">Pacientes</a></li>
+			        <li><div class="botao"><a href="/pacientes" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de Pacientes</a></div></li>
+			      </ul>
+			      <ul id="nav-mobile" class="menudireita right hide-on-med-and-down">
+			        <li><a href="#">Login</a></li>
+			        <li><a href="#">Usuário</a></li>
+			        <li><a href="#">Empresa</a></li>
+			      </ul>
+		      </div>
+		      
+		    </div>
+		  </nav>
+		  </div>
+	  </header>
+	
+	
+	 <!-- ASIDE -->
+	  <div th:replace="LayoutPadrao:: aside"></div> <!-- Carregando o aside do arquivo externo layoutPadrao -->
+	  
+	  
+	  <!-- SECTION -->
+	  <section class="conteudo" th:fragment="conteudo"> <!-- section com conteudo criado aqui nesta mesma página -->
+		  <!-- Conteudo -->
+		  <div class="container cabecalho">
+			  <div class="row" th:each="paciente : ${paciente}">
+			  
+			  	<h4><span th:text="${paciente.nome}"></span></h4>
+			  
+			  		<div class="input-field col s6">			
+			  		
+			  			<p>Telefone:  <span th:text="${paciente.telefone}"></span></p>
+			  		
+			  			<p>Email:  <span th:text="${paciente.email}"></span></p>
+			  			
+			  			<p>Endereço:  <span th:text="${paciente.endereco}"></span>, <span th:text="${paciente.numero}"></span></p>
+			  			
+			  			<p>Cidade/Estado/CEP:  <span th:text="${paciente.cidade}"></span>, <span th:text="${paciente.estado}">, <span th:text="${paciente.cep}"></span></span></p>
+			  		</div>	
+			  		
+			  		<div class="input-field col s6">
+			  			<p>Convênio:  <span th:text="${paciente.convenio.nomeConvenio}"></span></p>
+			  			
+			  			<p>Data Nascimento:  <span th:text="${paciente.nascimento}"></span></p>
+			  			
+			  			<p>Sexo:  <span th:text="${paciente.sexo}"></span></p>
+			  			
+			  			<p>Observação:  <span th:text="${paciente.observacao}"></span></p>
+			  		
+			  		</div>	
+			  	<a class="waves-effect waves-light btn-small editar"><i class="material-icons left">edit</i>Editar</a>
+				  			
+				<a class="waves-effect waves-light btn-small remover"><i class="material-icons left">delete</i>Remover</a>
+		
+			  	</div>
+		 </div>
+		 
+		 <div class="prontuarios">
+			 		<ul class="collapsible popout" data-collapsible="accordion" th:each="prontuario : ${prontuarios}">
+					  <li>
+					    <div class="collapsible-header">
+					      <i class="material-icons">access_time</i>
+					      <p> Prontuário: <span th:text="${prontuario.data}"></span></p>		
+					    </div>
+					    <div class="collapsible-body">
+					    	<p>Procedimento: <span th:text="${prontuario.procedimento.tipoProcedimento}"></span></p>
+					    	<p>Anamnese: <span th:text="${prontuario.anamnese}"></span></p>
+					  		<p>Diagnóstico: <span th:text="${prontuario.diagnostico}"></span></p>
+					  		<p>Procedimento Realizado: <span th:text="${prontuario.procedimentoRealizado}"></span></p>
+					  		<p>Prescrição de Remédios: <span th:text="${prontuario.prescricaoRemedios}"></span></p>
+					  		<p>Prescrição de Exames: <span th:text="${prontuario.prescricaoExames}"></span></p>
+					  		<p>Resultados: <span th:text="${prontuario.resultados}"></span></p>
+					  		<p>Observação: <span th:text="${prontuario.observacao}"></span></p>
+					  		<a class="waves-effect waves-light btn-small remover"><i class="material-icons left">delete</i>Remover</a>
+					    </div>
+					  </li>
+					</ul>
+		 	</div>
+	  </section>
+  
+  <!--Import jQuery before materialize.js-->
+  	  <script th:src="@{/jquery/jquery-3.2.1.js}"></script>
+	  <script th:src="@{/jquery/main.js}"></script>
+      <script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+      
+</body>
+</html>

@@ -1,0 +1,126 @@
+/* Layout padrao */
+.menu-itens{
+	padding-left: 10px;
+}
+
+.menu-icones{
+	padding-right: 50px;
+}
+
+.menu{
+	background-color: #009999;
+}
+
+.menu-lateral{
+	color: #009999;
+	
+}
+
+.user-view{
+	text-align:center;
+	border-bottom: solid 1px #009999;
+}
+
+.user-view h7{
+	margin-top: 20px;
+	font-size: 1.30rem;
+	text-align: left;
+	font-family: GillSans, Courier New, Trebuchet, sans-serif;
+}
+
+.user-view i{
+	margin-top: 20px;
+	font-size: 1.60rem;
+	text-align: right;
+}
+
+.side-nav{
+	width: 250px;
+}
+
+.navbar-fixed{
+	padding-left: 250px;
+}
+
+.btn, .btn-large { 
+  background-color: #00b359; /* BG */
+  color: white; /* Text */
+}
+
+.remover{ 
+  color: #ff0000; /* BG */
+}
+
+.editar{ 
+  color: #3333ff; /* BG */
+}
+
+.removerlarge{ 
+  color: white; /* BG */
+  background-color: #ff4d4d;
+}
+
+.editarlarge{ 
+  color: white; /* BG */
+  background-color: #0066ff;
+}
+
+.finalizar{
+	color: white; /* BG */
+  background-color: #ff4d4d;
+}
+
+.linkNome{
+	color: black;
+}
+
+.linkNome:hover{
+	color: #009999;
+}
+
+/*
+.btn:hover, .btn-large:hover {
+	background-color: #00b359;}  BG */
+
+
+.menudireita{
+	padding-right: 300px;
+}
+
+.form{
+    padding-left: 300px;
+}
+
+.formProntuario{
+	width: 80%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 50px 85px 50px 85px;
+    box-shadow: 0px 0px 5px grey;
+}
+
+.conteudo{
+	padding-left: 300px;
+}
+
+table {
+    width: 95%;
+    display: table;
+}
+
+.cabecalho{
+	width: 80%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 50px 85px 50px 85px;
+    background-color: #009999;
+    color: white;
+    box-shadow: 0px 0px 5px grey;
+}
+
+.prontuarios{
+	width: 80%;
+	margin: 50px 85px 50px 85px;
+}

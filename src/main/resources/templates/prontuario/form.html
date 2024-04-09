@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	  <title>Agenda Clínica</title>
+	<!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" th:href="@{/style/styleCss.css}"/>
+      <link th:href="@{/style/fullcalendar.min.css}" rel="stylesheet" /> 
+	  
+
+</head>
+<body>
+
+	  <!-- HEADER -->
+	  <header th:fragment="header">
+		<div class="navbar-fixed">
+		<nav class="menu">
+		    <div class="nav-wrapper">
+		     
+		      <div class="menu-itens">
+			      <ul class="menuesquerda left hide-on-med-and-down">
+			        <li><a href="#">Agenda - Dr. Michelli</a></li>
+			        
+			      </ul>
+			      <ul id="nav-mobile" class="menudireita right hide-on-med-and-down">
+			        <li><a href="#">Login</a></li>
+			        <li><a href="#">Usuário</a></li>
+			        <li><a href="#">Empresa</a></li>
+			      </ul>
+		      </div>
+		      
+		    </div>
+		  </nav>
+		  </div>
+	  </header>
+	
+	
+	 <!-- ASIDE -->
+	  <div th:replace="LayoutPadrao:: aside"></div> <!-- Carregando o aside do arquivo externo layoutPadrao -->
+	  
+	  
+	  <!-- SECTION -->
+	  <section class="conteudo" th:fragment="conteudo"> <!-- section com conteudo criado aqui nesta mesma página -->
+		  <!-- Conteudo -->
+		  <div class="container cabecalho">
+			  <div class="row" th:each="consulta : ${consulta}">
+			  
+			  	<h4><span th:text="${consulta.procedimento.tipoProcedimento}"></span>      <a href="/agenda" class="waves-effect waves-light btn finalizar"><i class="material-icons left">stop</i>Finalizar</a></h4>
+			  
+			  		<div class="input-field col s6">			
+			  		
+			  			<p>Paciente: <span th:text="${consulta.paciente.nome}"></span></p>
+			  			
+			  			<p>Data:  <span th:text="${consulta.data}"></span></p>
+			  		
+			  			<p>Início:  <span th:text="${consulta.horarioInicio}"></span> horas</p>
+			  			
+			  			<p>Término:  <span th:text="${consulta.horarioTermino}"></span> horas</p>
+			  			
+			  			<a class="waves-effect waves-light btn-small editar"><i class="material-icons left">edit</i>Editar</a>
+				  			
+						<a class="waves-effect waves-light btn-small remover"><i class="material-icons left">delete</i>Remover</a>
+			  		
+			  		</div>	
+			  		
+			  		<div class="input-field col s6">
+			  			
+			  			<p>Status:  <span th:text="${consulta.status}"></span></p>
+			  			
+			  			<p>Observação:  <span th:text="${consulta.observacao}"></span></p>
+			  		
+			  		</div>
+			  		
+			  	</div>
+		 </div>
+		 
+		 <form  method="post" th:object="${prontuario}">
+		 		<h5>Prontuário</h5>
+				<div class="container formProntuario"> 
+					
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Anamnese: <input type="text" value="" class="form-control" id="" name="anamnese"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Diagnóstico: <input type="text" value="" class="form-control" id="" name="diagnostico"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Procedimento realizado: <input type="text" value="" class="form-control" id="" name="procedimentoRealizado"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Prescrição de Remédios: <input type="text" value="" class="form-control" id="" name="prescricaoRemedios"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Prescrição de Exames: <input type="text" value="" class="form-control" id="" name="prescricaoExames"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Resultados: <input type="text" value="" class="form-control" id="" name="resultados"/>
+						  	</div>
+					  </div>
+					  <div class="row"> 
+					  		<div class="input-field col s12">
+						  		Observação: <input type="text" value="" class="form-control" id="" name="observacao"/>
+						  	</div>
+					  </div>
+					  <button class="btn waves-effect waves-light" type="submit">Salvar</button>
+			   </div> 
+		  </form>
+	  </section>
+  
+
+  	
+  <!--Import jQuery before materialize.js-->
+  	  <script th:src="@{/js/jquery.min.js}"></script>
+	  <script th:src="@{/js/moment.min.js}"></script>
+	  <script th:src="@{/js/fullcalendar.min.js}"></script>
+	  <script th:src="@{/js/lang-all.js}"></script>
+	  <script th:src="@{/js/agendaEventos.js}"></script>
+	  
+  	  <!-- <script src="jquery/jquery-3.2.1.js"></script> -->
+	  <!--  <script src="jquery/main.js"></script>-->
+      <script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+      
+</body>
+</html>
