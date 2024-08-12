@@ -1,10 +1,17 @@
 package agendaclinica.com.controllers;
 
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +23,8 @@ import agendaclinica.com.models.Prontuario;
 import agendaclinica.com.repositories.ConvenioRepository;
 import agendaclinica.com.repositories.PacienteRepository;
 import agendaclinica.com.repositories.ProntuariosRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class PacientesController {//terminar, colocar remove e edite
@@ -29,7 +38,7 @@ public class PacientesController {//terminar, colocar remove e edite
 	@Autowired
 	private ProntuariosRepository prr;
 	
-	@RequestMapping(value="/pacientes", method=RequestMethod.GET)
+	@RequestMapping(value="/pacientes", method=RequestMethod.GET)//url
 	public ModelAndView listaPacientes(Model model){
 		ModelAndView mv = new ModelAndView("pacientes/listaPacientes");
 		Iterable<Paciente> listaPacientes = pr.findAll();
@@ -52,7 +61,7 @@ public class PacientesController {//terminar, colocar remove e edite
 		return "redirect:/pacientes";
 	}
 	
-	@RequestMapping(value="/paciente/{nome}", method = RequestMethod.GET)
+	@RequestMapping(value="/paciente/{nome}", method = RequestMethod.GET) 
 	public ModelAndView detalhes(@PathVariable("nome") String nome){
 
 		ModelAndView mv = new ModelAndView("pacientes/pacienteDetalhes");
@@ -64,4 +73,23 @@ public class PacientesController {//terminar, colocar remove e edite
 		
 		return mv;
 	}
+
+	@PutMapping(value="/pacientes/{nome}") 
+	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome){
+
+		Optional<Paciente> pOptional = pr.findById(nome);
+
+        if(pOptional.isEmpty()){
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field Empty");
+        }
+
+        var peopleModel = pOptional.get();
+        //BeanUtils.copyProperties(aDto, peopleModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
+	}
+	
+
+	
 }
