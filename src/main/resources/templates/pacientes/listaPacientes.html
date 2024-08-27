@@ -73,6 +73,7 @@
 
 					<td><span th:text="${paciente.email}"></span></td>
 
+					<!--th:href="@{#modal3}"-->
 					<td><a class="waves-effect waves-light btn-small editar" 
 						th:href="@{#modal3}"><i
 								class="material-icons left">edit</i>Editar</a></td>
@@ -173,11 +174,11 @@
 		<div class="modal-content">
 			<h5>Editar Paciente</h5>
 			<!-- Conteudo -->
-			<form method="get" th:object="${paciente}">
-				<div class="">
+			<form> <!--method="put" th:object="paciente: ${paciente}-->
+				<div class="" th:each="paciente : ${paciente}">
 					<div class="row">
 						<div class="input-field col s12">
-							Nome: <input type="text" value="" class="form-control" name="nome" />
+							Nome: <input type="text" value="" class="form-control" name="nome" th:text="${paciente.nome}"/>
 						</div>
 					</div>
 
