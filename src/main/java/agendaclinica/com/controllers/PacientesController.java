@@ -74,6 +74,21 @@ public class PacientesController {//terminar, colocar remove e edite
 		return mv;
 	}
 
+	//--------------------------------------------------------------------------------//
+	@RequestMapping(value="/pacientes/{nome}", method = RequestMethod.GET) 
+	public ModelAndView listar(@PathVariable("nome") String nome){
+
+		ModelAndView mv = new ModelAndView("pacientes/pacienteListar");
+		Paciente paciente = pr.findByNome(nome);
+		mv.addObject("pacientes", paciente);
+		
+		Iterable<Prontuario> prontuarios = prr.findByPaciente(paciente);
+		mv.addObject("prontuarios", prontuarios);
+		
+		return mv;
+	}
+	//------------------------------------------------------------------------------//
+
 	@PutMapping(value="/pacientes/{nome}") 
 	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome){
 
