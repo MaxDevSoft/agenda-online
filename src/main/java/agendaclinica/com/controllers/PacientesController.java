@@ -74,11 +74,11 @@ public class PacientesController {//terminar, colocar remove e edite
 		return mv;
 	}
 
-	//--------------------------------------------------------------------------------//
+	
 	@RequestMapping(value="/pacientes/{nome}", method = RequestMethod.GET) 
 	public ModelAndView listar(@PathVariable("nome") String nome){
 
-		ModelAndView mv = new ModelAndView("pacientes/pacienteListar");
+		ModelAndView mv = new ModelAndView("pacientes/editarPaciente");
 		Paciente paciente = pr.findByNome(nome);
 		mv.addObject("pacientes", paciente);
 		
@@ -87,8 +87,8 @@ public class PacientesController {//terminar, colocar remove e edite
 		
 		return mv;
 	}
-	//------------------------------------------------------------------------------//
 
+	//------------------------------------------------------------------------------//
 	@PutMapping(value="/pacientes/{nome}") 
 	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome){
 
@@ -104,7 +104,7 @@ public class PacientesController {//terminar, colocar remove e edite
 
         return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
 	}
-	
+	//------------------------------------------------------------------------------//
 
 	
 }
