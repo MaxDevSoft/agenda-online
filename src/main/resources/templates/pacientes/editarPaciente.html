@@ -58,7 +58,7 @@
 		<div class="modal-content">
 			<h5>Editar Paciente</h5>
 			<!-- Conteudo -->
-			<form method="put" th:object="${pacientes}"> 
+			<form th:action="@{/editar/nome}" method="put" th:object="${paciente}"> <!---->
 				<div class="" th:each="paciente : ${pacientes}">
 					<div class="row">
 						<div class="input-field col s12">

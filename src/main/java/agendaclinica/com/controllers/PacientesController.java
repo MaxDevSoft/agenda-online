@@ -4,13 +4,16 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -75,7 +78,7 @@ public class PacientesController {//terminar, colocar remove e edite
 	}
 
 	
-	@RequestMapping(value="/pacientes/{nome}", method = RequestMethod.GET) 
+	@RequestMapping(value="/editar/{nome}", method = RequestMethod.GET) 
 	public ModelAndView listar(@PathVariable("nome") String nome){
 
 		ModelAndView mv = new ModelAndView("pacientes/editarPaciente");
@@ -89,7 +92,9 @@ public class PacientesController {//terminar, colocar remove e edite
 	}
 
 	//------------------------------------------------------------------------------//
-	@PutMapping(value="/pacientes/{nome}") 
+
+	@Primary
+	@PutMapping(value="/editar/{nome}") 
 	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome){
 
 		Optional<Paciente> pOptional = pr.findById(nome);
@@ -100,11 +105,26 @@ public class PacientesController {//terminar, colocar remove e edite
         }
 
         var peopleModel = pOptional.get();
-        //BeanUtils.copyProperties(aDto, peopleModel);
+        // BeanUtils.copyProperties(aDto, peopleModel);
 
         return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
 	}
 	//------------------------------------------------------------------------------//
 
+	// @Primary
+	// @RequestMapping(value = "/editar/{nome}", method = RequestMethod.PUT)
+	// public String updatePaciente (@PathVariable("nome") String nome, @ModelAttribute("paciente") Paciente paciente, Model model){
+
+	// 	Paciente modelPaciente = pr.findByNome(paciente.getNome()); //pegar o nome
+
+	// 	modelPaciente.setNome(paciente.getNome());
+
+	// 	pr.save(modelPaciente);
+
+	// 	model.addAttribute("message", "modelPaciente");
+
+	// 	return "redirect:/";
+
+	// }
 	
 }
