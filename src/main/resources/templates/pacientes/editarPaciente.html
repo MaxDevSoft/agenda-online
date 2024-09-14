@@ -58,11 +58,11 @@
 		<div class="modal-content">
 			<h5>Editar Paciente</h5>
 			<!-- Conteudo -->
-			<form th:action="@{/editar/nome}" method="put" th:object="${paciente}"> <!---->
-				<div class="" th:each="paciente : ${pacientes}">
+			<form th:action="@{/editarpaciente/{nome}}" method="post" th:object="${paciente}" th:each="paciente : ${pacientes}"> <!---->
+				<!-- <div class="" th:each="paciente : ${pacientes}"> -->
 					<div class="row">
 						<div class="input-field col s12">
-							Nome: <input type="text" value="" class="form-control" name="nome" th:value="${paciente.nome}"/>
+							Nome: <input type="text" value="" class="form-control" name="nome" th:value="${paciente.nome}" />
 						</div>
 					</div>
 
@@ -132,7 +132,7 @@
 							type="submit">Salvar</button>
 						<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
 					</div>
-				</div>
+				<!-- </div> -->
 			</form>
 		</div>
 	</div>

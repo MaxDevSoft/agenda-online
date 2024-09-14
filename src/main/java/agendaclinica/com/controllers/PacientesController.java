@@ -78,7 +78,7 @@ public class PacientesController {//terminar, colocar remove e edite
 	}
 
 	
-	@RequestMapping(value="/editar/{nome}", method = RequestMethod.GET) 
+	@RequestMapping(value="/editarpaciente/{nome}", method = RequestMethod.GET) 
 	public ModelAndView listar(@PathVariable("nome") String nome){
 
 		ModelAndView mv = new ModelAndView("pacientes/editarPaciente");
@@ -93,38 +93,38 @@ public class PacientesController {//terminar, colocar remove e edite
 
 	//------------------------------------------------------------------------------//
 
-	@Primary
-	@PutMapping(value="/editar/{nome}") 
-	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome){
+	// @Primary
+	// @PostMapping(value="/editarpaciente/{nome}") 
+	// public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome, @ModelAttribute("paciente") Paciente paciente){
 
-		Optional<Paciente> pOptional = pr.findById(nome);
+	// 	Optional<Paciente> pOptional = pr.findById(nome);
 
-        if(pOptional.isEmpty()){
+    //     if(pOptional.isEmpty()){
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field Empty");
-        }
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field Empty");
+    //     }
 
-        var peopleModel = pOptional.get();
-        // BeanUtils.copyProperties(aDto, peopleModel);
+    //     var peopleModel = pOptional.get();
+    //     // BeanUtils.copyProperties(aDto, peopleModel);
 
-        return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
-	}
+    //     return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
+	// }
 	//------------------------------------------------------------------------------//
 
-	// @Primary
-	// @RequestMapping(value = "/editar/{nome}", method = RequestMethod.PUT)
-	// public String updatePaciente (@PathVariable("nome") String nome, @ModelAttribute("paciente") Paciente paciente, Model model){
+	@Primary
+	@RequestMapping(value = "/editarpaciente/{nome}", method = RequestMethod.POST)
+	public String updatePaciente (@ModelAttribute("paciente") Paciente paciente, Model model){
 
-	// 	Paciente modelPaciente = pr.findByNome(paciente.getNome()); //pegar o nome
+		Paciente modelPaciente = pr.findByNome(paciente.getNome()); //pegar o nome
 
-	// 	modelPaciente.setNome(paciente.getNome());
+		modelPaciente.setNome(paciente.getNome());
 
-	// 	pr.save(modelPaciente);
+		pr.save(modelPaciente);
 
-	// 	model.addAttribute("message", "modelPaciente");
+		model.addAttribute("paciente", modelPaciente);
 
-	// 	return "redirect:/";
+		return "redirect:/ editarPaciente";
 
-	// }
+	}
 	
 }
