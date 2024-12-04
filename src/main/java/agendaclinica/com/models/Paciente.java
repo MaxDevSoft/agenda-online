@@ -3,13 +3,14 @@ package agendaclinica.com.models;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Paciente implements Serializable{
@@ -28,20 +29,21 @@ public class Paciente implements Serializable{
 	@DateTimeFormat(pattern="dd-mm-yyyy")
 	private String nascimento;
 	
-	private String sexo;
-	
 	@ManyToOne // N : 1
 	private Convenio convenio;
 	
 	@OneToMany
 	private List<Prontuario> prontuarios;
 	
+	private String sexo;
+
 	private String endereco;
 	private int numero;
 	private String bairro;
 	private String cidade;
 	private long cep;
 	private String estado;
+	
 	private long telefone;
 	private String email;
 	private String observacao;

@@ -5,18 +5,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import agendaclinica.com.models.BuscarCep;
+import agendaclinica.com.models.Endereco;
 
 public class BuscarCepService {
 
-    BuscarCep buscarCep = new BuscarCep();
+    Endereco buscarCep = new Endereco();
 
-    public BuscarCep mostrarCep (String cep){
+    public Endereco mostrarCep (String cep){
     
             try {
 
@@ -29,7 +27,7 @@ public class BuscarCepService {
 
                 ObjectMapper mapper = new ObjectMapper();
 
-                buscarCep = mapper.readValue(response.body(), BuscarCep.class);
+                buscarCep = mapper.readValue(response.body(), Endereco.class);
 
             } catch (IOException | InterruptedException e) {
 

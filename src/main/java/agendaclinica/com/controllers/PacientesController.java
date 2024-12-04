@@ -123,7 +123,7 @@ public class PacientesController {//terminar, colocar remove e edite
 
 		model.addAttribute("paciente", modelPaciente);
 
-		return "redirect:/ editarPaciente";
+		return "redirect:/";
 
 	}
 	
