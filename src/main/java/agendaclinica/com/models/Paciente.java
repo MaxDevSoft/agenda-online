@@ -1,13 +1,12 @@
 package agendaclinica.com.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -15,9 +14,9 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Paciente implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 	
-	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long codigo;
 	
 	@Id//o id tera que ser a chave estrangeira da outra coluna, por isso é importante definir certo!

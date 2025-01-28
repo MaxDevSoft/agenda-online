@@ -1,26 +1,25 @@
 package agendaclinica.com.models;
 
-
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotEmpty;
+
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Usuario implements Serializable{// UserDetails
+    
+    @Serial
+    private static final long serialVersionUID = 1L;
 	
-private static final long serialVersionUID = 1L;
-	
-	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long codigo;
 	
 	@Id

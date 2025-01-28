@@ -1,22 +1,18 @@
 package agendaclinica.com.controllers;
 
+
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,7 +22,7 @@ import agendaclinica.com.models.Prontuario;
 import agendaclinica.com.repositories.ConvenioRepository;
 import agendaclinica.com.repositories.PacienteRepository;
 import agendaclinica.com.repositories.ProntuariosRepository;
-import org.springframework.web.bind.annotation.RequestParam;
+import agendaclinica.com.service.PacienteService;
 
 
 @Controller
@@ -40,9 +36,13 @@ public class PacientesController {//terminar, colocar remove e edite
 	
 	@Autowired
 	private ProntuariosRepository prr;
+
+	@Autowired
+	private PacienteService ps;
 	
-	@RequestMapping(value="/pacientes", method=RequestMethod.GET)//url
+	@GetMapping("/pacientes")//url
 	public ModelAndView listaPacientes(Model model){
+
 		ModelAndView mv = new ModelAndView("pacientes/listaPacientes");
 		Iterable<Paciente> listaPacientes = pr.findAll();
 		mv.addObject("pacientes", listaPacientes);
@@ -53,8 +53,8 @@ public class PacientesController {//terminar, colocar remove e edite
 		return mv;
 	}
 	
-	@RequestMapping(value="/pacientes", method=RequestMethod.POST)
-	public String listaPacientes(Paciente paciente, BindingResult result, RedirectAttributes attributes){
+	@PostMapping("/pacientes")
+	public String savePacientes(Paciente paciente, BindingResult result, RedirectAttributes attributes){
 //		if(result.hasErrors()){
 //			attributes.addFlashAttribute("mensagem", "Verifique os campos digitados!");
 //			return cadastrarPaciente();
@@ -64,8 +64,8 @@ public class PacientesController {//terminar, colocar remove e edite
 		return "redirect:/pacientes";
 	}
 	
-	@RequestMapping(value="/paciente/{nome}", method = RequestMethod.GET) 
-	public ModelAndView detalhes(@PathVariable("nome") String nome){
+	@GetMapping("/paciente/{nome}") 
+	public ModelAndView detalhes(@PathVariable String nome){
 
 		ModelAndView mv = new ModelAndView("pacientes/pacienteDetalhes");
 		Paciente paciente = pr.findByNome(nome);
@@ -78,8 +78,8 @@ public class PacientesController {//terminar, colocar remove e edite
 	}
 
 	
-	@RequestMapping(value="/editarpaciente/{nome}", method = RequestMethod.GET) 
-	public ModelAndView listar(@PathVariable("nome") String nome){
+	@GetMapping("/editarpaciente/{nome}") 
+	public ModelAndView listar(@PathVariable String nome){
 
 		ModelAndView mv = new ModelAndView("pacientes/editarPaciente");
 		Paciente paciente = pr.findByNome(nome);
@@ -93,38 +93,38 @@ public class PacientesController {//terminar, colocar remove e edite
 
 	//------------------------------------------------------------------------------//
 
-	// @Primary
-	// @PostMapping(value="/editarpaciente/{nome}") 
-	// public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome, @ModelAttribute("paciente") Paciente paciente){
+	
+	@PostMapping(value="/update/{nome}") 
+	public ResponseEntity<Object> updPaciente (@PathVariable("nome") String nome, @ModelAttribute("paciente") Paciente paciente){
 
-	// 	Optional<Paciente> pOptional = pr.findById(nome);
+		Optional<Paciente> pOptional = pr.findById(nome); 
 
-    //     if(pOptional.isEmpty()){
+        if(pOptional.isEmpty()){
 
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field Empty");
-    //     }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field Empty");
+        }else{
 
-    //     var peopleModel = pOptional.get();
-    //     // BeanUtils.copyProperties(aDto, peopleModel);
+			 var peopleModel = pOptional.get();
+        // BeanUtils.copyProperties(aDto, peopleModel);
 
-    //     return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
-	// }
+        return ResponseEntity.status(HttpStatus.OK).body(pr.save(peopleModel));
+		}
+
+       
+	}
 	//------------------------------------------------------------------------------//
 
-	@Primary
-	@RequestMapping(value = "/editarpaciente/{nome}", method = RequestMethod.POST)
-	public String updatePaciente (@ModelAttribute("paciente") Paciente paciente, Model model){
+	
+	// @PostMapping("/atualizar-paciente")
+	// public String updatePaciente (Paciente paciente, Model model){
 
-		Paciente modelPaciente = pr.findByNome(paciente.getNome()); //pegar o nome
+	// 	Paciente modelPaciente = ps.savePaciente(paciente);
 
-		modelPaciente.setNome(paciente.getNome());
 
-		pr.save(modelPaciente);
+	// 	model.addAttribute("paciente", modelPaciente);
 
-		model.addAttribute("paciente", modelPaciente);
+	// 	return "redirect:/";
 
-		return "redirect:/";
-
-	}
+	// }
 	
 }

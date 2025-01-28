@@ -1,7 +1,5 @@
 package agendaclinica.com.controllers;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -45,7 +43,7 @@ public class AgendaController {
 	@Autowired
 	private ProntuariosRepository prr;
 	
-	@RequestMapping(value = "/agenda", method = RequestMethod.GET)
+	@GetMapping("/agenda")
 	public ModelAndView MontaAgenda(Model model) {
 		 
 		ModelAndView mv = new ModelAndView("agenda/agenda");
@@ -58,7 +56,7 @@ public class AgendaController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/agenda", method=RequestMethod.POST)
+	@PostMapping("/agenda")
 	public String MontaAgenda(Consulta consulta){
 		consulta.setStatus(true);
 		cr.save(consulta);
@@ -67,7 +65,7 @@ public class AgendaController {
 		return "redirect:/agenda";
 	}
 	
-	@RequestMapping(value="/getEventos.json", method = RequestMethod.GET)
+	@GetMapping("/getEventos.json")
 	public @ResponseBody Iterable<Evento> agenda(){
 		
 		Iterable<Evento> listaEventos = er.findAll();
@@ -75,8 +73,8 @@ public class AgendaController {
 		return listaEventos;
 	}
 	
-	@RequestMapping(value="/consulta/{codigo}", method = RequestMethod.GET)
-	public ModelAndView detalhesConsulta(@PathVariable("codigo") long codigo){
+	@GetMapping("/consulta/{codigo}")
+	public ModelAndView detalhesConsulta(@PathVariable long codigo){
 		ModelAndView mv = new ModelAndView("agenda/consultaDetalhes");
 		Consulta consulta = cr.findByCodigo(codigo);
 		mv.addObject("consulta", consulta);
@@ -91,8 +89,8 @@ public class AgendaController {
 //		return mv;
 //	}
 	
-	@RequestMapping(value="/consulta/{codigo}", method = RequestMethod.POST)
-	public String formProntuarioPost(@PathVariable("codigo") long codigo,  Prontuario prontuario, BindingResult result, RedirectAttributes attributes){
+	@PostMapping("/consulta/{codigo}")
+	public String formProntuarioPost(@PathVariable long codigo,  Prontuario prontuario, BindingResult result, RedirectAttributes attributes){
 	
 		Consulta consulta = cr.findByCodigo(codigo);
 		
