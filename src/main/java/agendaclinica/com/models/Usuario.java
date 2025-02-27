@@ -2,13 +2,9 @@ package agendaclinica.com.models;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotEmpty;
 
 //import org.springframework.security.core.GrantedAuthority;
@@ -27,15 +23,8 @@ public class Usuario implements Serializable{// UserDetails
 	
 	@NotEmpty
 	private String senha;
+
 	
-	//@JoinTable(name="usuario_roles", joinColumns = @JoinColumn (name="usuario_nome"), inverseJoinColumns = @JoinColumn(name="roles_nome_role"))
-	@ManyToMany
-	@JoinTable( 
-	        name = "usuarios_roles", 
-	        joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "nome"), 
-	        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "nomeRole")) 
-    private List<Role> roles;
-		
 
 	
 	public long getCodigo() {
@@ -62,13 +51,6 @@ public class Usuario implements Serializable{// UserDetails
 		this.senha = senha;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
 /*
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

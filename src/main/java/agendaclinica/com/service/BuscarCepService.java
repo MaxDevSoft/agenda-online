@@ -31,7 +31,7 @@ public class BuscarCepService {
 
             } catch (IOException | InterruptedException e) {
 
-                e.printStackTrace();
+                
             }
 
             return buscarCep;

@@ -15,28 +15,27 @@
 </head>
 <body>
     <p>Fazer Login</p>
-    <div id="IdLogin" class="modal">
+    <div id="IdLogin" class="">
 	    <div class="modal-content">
 	      <!-- Conteudo -->
-		  <form  > <!--method="post" th:object="${convenio}"-->
+		  <form  th:action="login"> <!--method="get" th:object="${convenio}"-->
 				<div class=""> 
 					  <div class="row"> 
 					  		<div class="input-field col s6">
-						  		Usuário: <input type="text" value="" class="form-control" id="" name="nomeConvenio"/>
+						  		Usuário: <input type="text" value="" class="form-control" id="usuario" name="nameUser"/>
 						  	</div>
+							<div class="input-field col s6">
+								Senha: <input type="password" value="" class="form-control" id="senha" name="passwordUser"/>
+							</div>
 					  </div>
 					  <div class="modal-footer">
-					  	  <button class="btn waves-effect waves-light modal-action modal-close" type="submit">Salvar</button>
-					      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+					  	  <button class="btn waves-effect waves-light modal-action modal-close" type="submit">Entrar</button>
+					      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Esqueci a senha</a>
 					  </div>
 			   </div> 
 		  </form>
 	    </div>
-	  </div>
-        
-
-    </form>
-
+	</div>
     <script src="jquery/jquery-3.2.1.js"></script>
 	 <script src="jquery/main.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>

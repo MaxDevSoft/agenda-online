@@ -42,8 +42,8 @@ public class PacientesController {//terminar, colocar remove e edite
 	
 	@GetMapping("/pacientes")//url
 	public ModelAndView listaPacientes(Model model){
-
-		ModelAndView mv = new ModelAndView("pacientes/listaPacientes");
+		
+		ModelAndView mv = new ModelAndView("pacientes/listaPacientes"); // retorna o view que será exibida 
 		Iterable<Paciente> listaPacientes = pr.findAll();
 		mv.addObject("pacientes", listaPacientes);
 		
@@ -67,7 +67,7 @@ public class PacientesController {//terminar, colocar remove e edite
 	@GetMapping("/paciente/{nome}") 
 	public ModelAndView detalhes(@PathVariable String nome){
 
-		ModelAndView mv = new ModelAndView("pacientes/pacienteDetalhes");
+		ModelAndView mv = new ModelAndView("pacientes/pacienteDetalhes"); 
 		Paciente paciente = pr.findByNome(nome);
 		mv.addObject("paciente", paciente);
 		

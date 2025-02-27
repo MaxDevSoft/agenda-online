@@ -25,7 +25,7 @@ import agendaclinica.com.repositories.PacienteRepository;
 import agendaclinica.com.repositories.ProcedimentoRepository;
 import agendaclinica.com.repositories.ProntuariosRepository;
 
-@Controller
+@Controller 
 public class AgendaController {
 	
 	@Autowired
@@ -46,7 +46,7 @@ public class AgendaController {
 	@GetMapping("/agenda")
 	public ModelAndView MontaAgenda(Model model) {
 		 
-		ModelAndView mv = new ModelAndView("agenda/agenda");
+		ModelAndView mv = new ModelAndView("agenda/agenda"); 
 
 		Iterable<Procedimento> listaProcedimentos = pr.findAll();
 		model.addAttribute("procedimentos", listaProcedimentos);
