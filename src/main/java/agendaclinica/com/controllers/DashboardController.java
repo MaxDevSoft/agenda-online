@@ -8,6 +8,11 @@ public class DashboardController {
 	
 	@RequestMapping("/")
 	public String index(){
+		return "LayoutPadrao";
+	}
+
+	@RequestMapping("/login")
+	public String login(){
 		return "LoginScreen";
 	}
 

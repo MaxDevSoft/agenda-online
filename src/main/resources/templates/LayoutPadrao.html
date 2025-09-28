@@ -7,6 +7,8 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+	   <!---->
+      <link type="text/css" rel="stylesheet" href="../static/style/home.css" media="all" th:href="@{/style/home.css}">
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,6 +16,10 @@
 
 </head>
 <body>
+
+	<div id="home-img">
+		<img src="../static/images/imagem-tela-principal.png" alt="" th:src="@{/images/imagem-tela-principal.png}">
+	</div>
 	  
 	  <!-- ASIDE -->
 	  <div th:fragment="aside">
@@ -24,8 +30,8 @@
 				<li>
 					<div class="user-view">
 						<div class="backgroud">
-							<h7>Agenda Clínica</h7>
-							<i class="small material-icons">date_range</i>
+							<a href="/"><h7>Agenda Clínica</h7>
+							<i class="small material-icons">date_range</i></a>
 						</div>
 					</div>
 				</li>

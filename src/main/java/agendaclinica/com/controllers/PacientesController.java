@@ -22,7 +22,6 @@ import agendaclinica.com.models.Prontuario;
 import agendaclinica.com.repositories.ConvenioRepository;
 import agendaclinica.com.repositories.PacienteRepository;
 import agendaclinica.com.repositories.ProntuariosRepository;
-import agendaclinica.com.service.PacienteService;
 
 
 @Controller
@@ -37,8 +36,17 @@ public class PacientesController {//terminar, colocar remove e edite
 	@Autowired
 	private ProntuariosRepository prr;
 
-	@Autowired
-	private PacienteService ps;
+	@PostMapping("/pacientes")
+	public String savePacientes(Paciente paciente, BindingResult result, RedirectAttributes attributes){
+//		if(result.hasErrors()){
+//			attributes.addFlashAttribute("mensagem", "Verifique os campos digitados!");
+//			return cadastrarPaciente();
+//		}
+		pr.save(paciente);
+		System.out.println(paciente.getConvenio());
+		return "redirect:/pacientes";
+	}
+	
 	
 	@GetMapping("/pacientes")//url
 	public ModelAndView listaPacientes(Model model){
@@ -53,16 +61,7 @@ public class PacientesController {//terminar, colocar remove e edite
 		return mv;
 	}
 	
-	@PostMapping("/pacientes")
-	public String savePacientes(Paciente paciente, BindingResult result, RedirectAttributes attributes){
-//		if(result.hasErrors()){
-//			attributes.addFlashAttribute("mensagem", "Verifique os campos digitados!");
-//			return cadastrarPaciente();
-//		}
-		pr.save(paciente);
-		System.out.println(paciente.getConvenio());
-		return "redirect:/pacientes";
-	}
+	
 	
 	@GetMapping("/paciente/{nome}") 
 	public ModelAndView detalhes(@PathVariable String nome){
