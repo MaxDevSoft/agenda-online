@@ -21,7 +21,7 @@ public class ConveniosController {
 	public ModelAndView listaConvenios(){
 		ModelAndView mv = new ModelAndView("convenio/listaConvenios");
 		Iterable<Convenio> listaConvenios = cr.findAll();
-		System.out.println(listaConvenios);
+		//System.out.println(listaConvenios);
 		mv.addObject("convenios", listaConvenios);
 		return mv;
 	}

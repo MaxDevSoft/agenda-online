@@ -25,10 +25,10 @@
   
   <div class="login-page">
     <div class="form">
-
-      <input type="text" id="username" placeholder="usuário" />
-      <button id="login" type="button" onclick="login()">Logar</button></br>
-
+      <form method="post" th:object="${loginUser}">
+        <input type="text" id="username" placeholder="usuário" name="name"/>
+        <button id="login" type="submit">Logar</button></br>
+      </form>
     </div>
   </div>
   

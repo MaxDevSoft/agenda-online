@@ -1,20 +1,9 @@
 package agendaclinica.com.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 
-//@Controller
-// @RestController
-// @RequestMapping("/login")
-@Controller
 public class LoginController {
 
-  @PostMapping("/login")
-  public String loginUser (){
 
-    return "A";
-
-  }
 
 
   //   @GetMapping("/login")

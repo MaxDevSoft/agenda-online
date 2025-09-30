@@ -11,9 +11,6 @@ public class DashboardController {
 		return "LayoutPadrao";
 	}
 
-	@RequestMapping("/login")
-	public String login(){
-		return "LoginScreen";
-	}
+	
 
 }
