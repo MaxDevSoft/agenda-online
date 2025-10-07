@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AgendaonlineApplicationTests {
 
 	@Test
-	public void contextLoads() {
+	public static void contextLoads() {
 	}
 
 }
